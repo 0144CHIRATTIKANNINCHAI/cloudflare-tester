@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modern website for testing Cloudflare security and performance features">
+  <title>Cloudflare Tester - Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FIXED CSS PATH -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">☁️ CF Tester</div>
+      <ul class="nav-links">
+        <!-- FIXED NAV LINKS -->
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="test.html">Test</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Cloudflare Testing Platform</h1>
+        <p>
+          Test and analyze Cloudflare security features, performance metrics,
+          and visitor information in real-time
+        </p>
+        <div class="hero-buttons">
+          <a href="test.html" class="btn btn-primary">Start Testing</a>
+          <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <section class="mt-2">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">System Status</h2>
+          <div class="status">
+            <span class="status-dot online"></span>
+            <span>Online</span>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="info-item">
+            <div class="info-label">API Status</div>
+            <div class="info-value" id="api-status">Checking...</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Server Time</div>
+            <div class="info-value" id="server-time">--:--:--</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Your IP</div>
+            <div class="info-value" id="your-ip">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="mt-2">
+      <h2 class="text-center mb-2">Cloudflare Testing Features</h2>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>🔒 Security Headers</h3>
+          <p style="color: var(--text-secondary);">
+            Analyze Cloudflare security headers including CF-Ray,
+            CF-Connecting-IP, and visitor information.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>🌍 Geolocation Data</h3>
+          <p style="color: var(--text-secondary);">
+            View visitor country codes and geographic information.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>⚡ Performance Metrics</h3>
+          <p style="color: var(--text-secondary);">
+            Measure response times and analyze request headers.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>📊 Real-time Dashboard</h3>
+          <p style="color: var(--text-secondary);">
+            Monitor visitor and Cloudflare data in real-time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Info -->
+    <section class="mt-2">
+      <div class="card">
+        <h2 class="card-title">API Endpoint</h2>
+        <div class="code-block">
+<pre>GET /api/info</pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FIXED JS PATH -->
+  <script src="js/main.js"></script>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('server-time').textContent =
+        now.toLocaleTimeString();
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    async function checkStatus() {
+      try {
+        const response = await fetch('/api/info');
+        const data = await response.json();
+
+        document.getElementById('api-status').textContent =
+          '✓ Operational';
+        document.getElementById('your-ip').textContent =
+          data.ip;
+
+      } catch (error) {
+        document.getElementById('api-status').textContent =
+          '✗ Error';
+        document.getElementById('your-ip').textContent =
+          'Unable to fetch';
+      }
+    }
+
+    checkStatus();
+  </script>
+
+</body>
+</html>

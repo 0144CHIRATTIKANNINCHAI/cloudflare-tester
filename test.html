@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test Cloudflare headers and visitor information">
+    <title>Cloudflare Tester - Test Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">☁️ CF Tester</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/test" class="active">Test</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="text-center" style="margin-bottom: 2rem;">Cloudflare Test Page</h1>
+
+        <!-- Test Button -->
+        <div class="text-center mb-2">
+            <button class="btn btn-primary" id="test-btn" onclick="runTest()">
+                🚀 Run API Test
+            </button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="results" class="hidden">
+            <!-- Visitor Information -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Visitor Information</h2>
+                    <span class="badge badge-success">Active</span>
+                </div>
+                <div class="grid grid-2">
+                    <div class="info-item">
+                        <div class="info-label">IP Address</div>
+                        <div class="info-value" id="ip-address">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Country</div>
+                        <div class="info-value" id="country">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Timestamp</div>
+                        <div class="info-value" id="timestamp">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Protocol</div>
+                        <div class="info-value" id="protocol">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Browser Information -->
+            <div class="card">
+                <h2 class="card-title">Browser Information</h2>
+                <div class="info-item">
+                    <div class="info-label">User Agent</div>
+                    <div class="info-value" id="user-agent">--</div>
+                </div>
+            </div>
+
+            <!-- Cloudflare Headers -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Cloudflare Headers</h2>
+                    <span class="badge" id="cf-badge">--</span>
+                </div>
+                <div class="grid grid-2">
+                    <div class="info-item">
+                        <div class="info-label">CF-Connecting-IP</div>
+                        <div class="info-value" id="cf-ip">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">CF-Ray</div>
+                        <div class="info-value" id="cf-ray">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">CF-IPCountry</div>
+                        <div class="info-value" id="cf-country">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">CF-Visitor</div>
+                        <div class="info-value" id="cf-visitor">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Request Headers -->
+            <div class="card">
+                <h2 class="card-title">All Request Headers</h2>
+                <div class="table-container">
+                    <table id="headers-table">
+                        <thead>
+                            <tr>
+                                <th>Header Name</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="headers-body">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Raw JSON Response -->
+            <div class="card">
+                <h2 class="card-title">Raw JSON Response</h2>
+                <div class="code-block">
+                    <pre id="raw-json">--</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/test.js"></script>
+</body>
+
+</html>

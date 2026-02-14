@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real-time Cloudflare testing dashboard">
+    <title>Cloudflare Tester - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">☁️ CF Tester</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/test">Test</a></li>
+                <li><a href="/dashboard" class="active">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1>Real-time Dashboard</h1>
+            <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh</button>
+        </div>
+
+        <!-- Main Stats -->
+        <div class="grid grid-3">
+            <div class="card">
+                <div class="info-label">Your IP Address</div>
+                <div class="info-value" id="dash-ip" style="font-size: 1.5rem;">Loading...</div>
+            </div>
+            <div class="card">
+                <div class="info-label">Country</div>
+                <div class="info-value" id="dash-country" style="font-size: 1.5rem;">--</div>
+            </div>
+            <div class="card">
+                <div class="info-label">Last Updated</div>
+                <div class="info-value" id="dash-time" style="font-size: 1.5rem;">--</div>
+            </div>
+        </div>
+
+        <!-- Detailed Information -->
+        <div class="grid grid-2 mt-2">
+            <!-- Connection Details -->
+            <div class="card">
+                <h2 class="card-title">Connection Details</h2>
+                <div class="info-item">
+                    <div class="info-label">Protocol</div>
+                    <div class="info-value" id="dash-protocol">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Hostname</div>
+                    <div class="info-value" id="dash-hostname">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Method</div>
+                    <div class="info-value" id="dash-method">--</div>
+                </div>
+            </div>
+
+            <!-- Cloudflare Status -->
+            <div class="card">
+                <h2 class="card-title">Cloudflare Status</h2>
+                <div class="info-item">
+                    <div class="info-label">CF-Ray ID</div>
+                    <div class="info-value" id="dash-cf-ray">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">CF-Connecting-IP</div>
+                    <div class="info-value" id="dash-cf-ip">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">CF-IPCountry</div>
+                    <div class="info-value" id="dash-cf-country">--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Agent -->
+        <div class="card mt-2">
+            <h2 class="card-title">Browser Information</h2>
+            <div class="info-item">
+                <div class="info-label">User Agent</div>
+                <div class="info-value" id="dash-ua">--</div>
+            </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="card mt-2">
+            <h2 class="card-title">Activity Log</h2>
+            <div id="activity-log">
+                <div class="info-item">
+                    <div class="info-value">Dashboard initialized. Click refresh to load data.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auto-refresh Toggle -->
+        <div class="card mt-2">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3>Auto-refresh</h3>
+                    <p style="color: var(--text-secondary); margin: 0;">Automatically update data every 10 seconds</p>
+                </div>
+                <label style="display: flex; align-items: center; gap: 1rem; cursor: pointer;">
+                    <input type="checkbox" id="auto-refresh" onchange="toggleAutoRefresh()"
+                        style="width: 20px; height: 20px; cursor: pointer;">
+                    <span id="auto-status">Disabled</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>
